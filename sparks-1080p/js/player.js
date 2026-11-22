@@ -145,6 +145,25 @@
     return !mime || document.createElement('video').canPlayType(mime) !== '';
   }
 
+  // an app's own web view on iPhone or iPad (LinkedIn, Instagram, ...) can have no route to the
+  // HEVC decoder the phone has, so a dead stream there needs a way out, not a codec excuse.
+  // the app's name, '' for an unnamed app, or null for a real browser
+  const IN_APP = [
+    [/LinkedInApp/, 'LinkedIn'], [/FBAN|FBAV|FB_IAB/, 'Facebook'], [/Instagram/, 'Instagram'],
+    [/Twitter/, 'X'], [/\bLine\//, 'LINE'], [/Snapchat/, 'Snapchat'],
+    [/musical_ly|BytedanceWebview/, 'TikTok'], [/Pinterest/, 'Pinterest'],
+  ];
+  function inAppBrowser() {
+    const ua = navigator.userAgent || '';
+    const ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    if (!ios) return null;
+    for (const [re, name] of IN_APP) if (re.test(ua)) return name;
+    // Chrome, Firefox and Edge for iOS are web views too, but full browsers
+    if (/CriOS|FxiOS|EdgiOS/.test(ua)) return null;
+    return /Safari\//.test(ua) ? null : '';
+  }
+  const inApp = inAppBrowser();
+
   function buildStage() {
     const stage = $('#stage');
     for (const s of everything()) {
@@ -412,13 +431,25 @@
       s.video.removeAttribute('src');
       s.video.hidden = true;
       const hevc = /hvc1|hev1/.test(s.mime || '');
-      s.msg.replaceChildren(
-        h('strong', { text: `This browser can’t play ${s.label}` }),
-        h('p', {
-          text: hevc
-            ? 'It is HEVC, and this browser has no HEVC decoder. Safari plays it, and so do Chrome and Edge on hardware that decodes HEVC. The quality timeline below works either way.'
-            : `It can’t decode ${s.codec || 'this format'}. The quality timeline below works either way.`,
-        }));
+      if (inApp != null) {
+        s.msg.replaceChildren(
+          h('strong', { text: 'Open this page in Safari to watch the encodes' }),
+          h('p', {
+            text: (inApp ? `${inApp}’s` : 'This app’s') + ' built-in browser can’t play these videos. '
+              + (inApp === 'LinkedIn'
+                ? 'Tap the ••• menu and choose Open in browser.'
+                : 'Use its menu to open the page in your browser, or copy the link into Safari.')
+              + ' The quality timeline below works here too.',
+          }));
+      } else {
+        s.msg.replaceChildren(
+          h('strong', { text: `This browser can’t play ${s.label}` }),
+          h('p', {
+            text: hevc
+              ? 'It is HEVC, and this browser has no HEVC decoder. Safari plays it, and so do Chrome and Edge on hardware that decodes HEVC. The quality timeline below works either way.'
+              : `It can’t decode ${s.codec || 'this format'}. The quality timeline below works either way.`,
+          }));
+      }
       s.msg.hidden = false;
       $('#loading').hidden = true;
     }
