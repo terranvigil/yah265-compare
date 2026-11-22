@@ -1,0 +1,18 @@
+This repository holds two kinds of material under different licenses.
+
+Player code (each folder's index.html, css/ and js/) is from veo,
+https://github.com/terranvigil/veo, and is licensed under the Apache
+License, Version 2.0: https://www.apache.org/licenses/LICENSE-2.0
+
+Video and its derived data (each folder's media/ and manifest.json):
+
+- nocturne-4k/: Nocturne (c) Netflix, Inc., Netflix Open Content,
+  licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+- sparks-1080p/: Sparks (c) Netflix, Inc., Netflix Open Content,
+  licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+- screen-wikipedia/: Wikipedia screen recording by Thomas Daede, released
+  under CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/ . The
+  page text shown is Wikipedia's, licensed under CC BY-SA 4.0:
+  https://creativecommons.org/licenses/by-sa/4.0/
+
+The excerpts were cut, scaled and re-encoded for these comparisons.

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>yah265 comparisons</title>
+<meta name="description" content="Watch yah265 and x265 encodes of the same open clips at the same file size, side by side.">
+<style>
+:root { --paper:#f8f9fa; --surface:#fff; --ink:#212529; --ink-3:#666c73; --hairline:#dee2e6; --accent:#b8330a; --neon:#ff4d1a; }
+@media (prefers-color-scheme: dark) { :root { --paper:#131517; --surface:#1b1c1e; --ink:#e9ecee; --ink-3:#8f959a; --hairline:#2e3135; --accent:#ff8a5c; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.6 "Iowan Old Style",Charter,Georgia,serif; }
+main { max-width:44rem; margin:0 auto; padding:3rem 16px; }
+h1 { font-size:2.2rem; margin:0 0 .4rem; }
+.rule { height:2px; background:linear-gradient(90deg,var(--neon),#ff6a00 60%,transparent); margin:0 0 1.6rem; border-radius:2px; }
+p { margin:0 0 1.2rem; }
+a { color:var(--accent); }
+.cards { display:grid; gap:1rem; margin:2rem 0; }
+.card { display:block; text-decoration:none; color:inherit; background:var(--surface); border:1px solid var(--hairline); border-radius:10px; padding:1.1rem 1.2rem; }
+.card:hover { border-color:var(--neon); }
+.card b { display:block; font-size:1.2rem; color:var(--ink); }
+.card span { font:0.85rem/1.5 system-ui,sans-serif; color:var(--ink-3); }
+footer { font:0.78rem/1.6 system-ui,sans-serif; color:var(--ink-3); margin-top:2.5rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>yah265 comparisons</h1>
+<div class="rule"></div>
+<p>Each page plays a yah265 encode and an x265 encode of the same open clip, made at the same file size. Switch between them, scrub to the hardest moments, and judge for yourself.</p>
+<div class="cards">
+<a class="card" href="nocturne-4k/"><b>Nocturne, 4K at 60 fps</b><span>30 seconds of a grain-heavy film. About 64 Mbit/s per stream, so it needs a fast connection.</span></a>
+<a class="card" href="sparks-1080p/"><b>Sparks, 1080p at 60 fps</b><span>30 seconds of a welder and a construction crew, at a low streaming rate. The difference shows most in the close-ups.</span></a>
+<a class="card" href="screen-wikipedia/"><b>A Wikipedia page, scrolling</b><span>Four seconds of screen recording at 1.2 Mbit/s. Watch the text.</span></a>
+</div>
+<p><a href="https://terranvigil.github.io/yah265/">yah265 docs and results</a></p>
+<footer>Nocturne (c) Netflix, Inc., Netflix Open Content, CC BY 4.0. Sparks (c) Netflix, Inc., Netflix Open Content, CC BY 4.0. The Wikipedia screen recording by Thomas Daede is CC0 1.0, and the page text is Wikipedia's, CC BY-SA 4.0. The excerpts were cut and re-encoded for these comparisons.</footer>
+</main>
+</body>
+</html>
